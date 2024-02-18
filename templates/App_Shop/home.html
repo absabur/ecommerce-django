@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block body_block %}
+<div class="products-page">
+  <h2 style="text-align: center">Featured Products</h2>
+  <div class="products">
+    {%if object_list|length == 0%}
+    <h4>No Products</h4>
+    {%endif%}
+    {% for product in object_list %}
+    <div class="product-card" style="position: relative;">
+      <img
+        class="product-card-image"
+        src="/static/{{ product.mainimage }}"
+        alt="{{ product.name }}"
+      />
+      <div class="product-card-body">
+        <h4>
+          <a
+            class="link-title"
+            href="{%url 'App_Shop:product_detail' pk=product.pk%}"
+            >{{ product.name|slice:"20" }}...</a
+          >
+        </h4>
+        {%if product.created_by.id == 1%}
+        <span class="bg-dark text-light p-2" style="position: absolute; top: 10px;right: 10px; border-radius: 5px;">verified <i class="text-success fa-solid fa-circle-check"></i></span>
+        {%endif%}
+        <p>
+          Price:
+          <span class="price">{{ product.price|floatformat:2 }}&#2547;</span>
+          <span class="old-price"
+            >{{product.old_price|floatformat:2}}&#2547;</span
+          >
+        </p>
+        <div class="card-button">
+          <a
+            href="{%url 'App_Order:add' pk=product.pk%}"
+            class="btn btn-warning w-100"
+            ><i class="fa fa-shopping-cart"></i>Add to cart</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

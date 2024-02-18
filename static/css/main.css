@@ -1,0 +1,291 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.messages{
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+}
+
+.suggession {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.suggession a {
+  margin-left: 20px;
+}
+.products {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;
+}
+.product-card {
+  width: 300px;
+  height: 400px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  background-color: #f1f1f1;
+}
+.product-card-image {
+  width: 100%;
+  height: 65%;
+  object-fit: contain;
+  background: white;
+}
+.product-card-body {
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+.product-card-body h4 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.link-title {
+  text-decoration: none;
+  color: black;
+}
+.link-title:hover {
+  text-decoration: underline;
+  color: red;
+}
+.price {
+  font-weight: 600;
+  color: green;
+}
+.old-price {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.card-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.card-button button {
+  width: 100%;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* .form {
+  max-width: 500px;
+  box-shadow: 0 0 5px black;
+  border-radius: 10px;
+  padding: 20px;
+  margin: auto;
+} */
+.form {
+  width: 100%;
+}
+
+.dashboard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.main-content {
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dash-links{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.dash-circle {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: aqua;
+  border-radius: 100%;
+  box-shadow: 0 0 5px black;
+  text-decoration: none;
+  color: red;
+  font-weight: 600;
+  margin: 10px;
+}
+
+.side-bar {
+  position: absolute;
+  z-index: 2;
+  top: 90px;
+  width: 300px;
+  height: 100%;
+  background-color: #f1f1f1;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
+  transition: 0.3s ease-in-out;
+}
+
+.toggle-seller {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  z-index: 3;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background-color: greenyellow;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 5px black;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.side-bar-lists {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  list-style: none;
+}
+
+.side-bar-lists li {
+  width: 100%;
+  margin: 5px 0;
+  box-shadow: 0 0 5px black;
+  border-radius: 5px;
+  background-color: rgb(255, 251, 244);
+}
+
+.side-bar-lists li a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: tomato;
+  font-size: 19px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.side-bar-lists li a:hover{
+  color: rgb(0, 141, 141);
+}
+
+.dash-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dash-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.category {
+  padding: 10px;
+  box-shadow: 0 0 5px black;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.coupon {
+  padding: 10px;
+  box-shadow: 0 0 5px black;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.order-seller{
+  padding: 10px;
+  box-shadow: 0 0 5px black;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.coupons-preview{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  box-shadow: 0 0 2px black;
+  background-color: #f1f1f1;
+}
+
+
+.coupon-parent{
+  position: relative;
+}
+
+.copy-message{
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  background: inherit;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.coupon-code{
+  cursor: pointer;
+}
+
+.shop-head{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+  padding: 20px 10px;
+}

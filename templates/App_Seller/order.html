@@ -1,0 +1,33 @@
+{% extends "App_Seller/dashboard.html" %}
+{%load crispy_forms_tags%}
+{%block title_block%}My Orders{%endblock%}
+{%block dash_block%}
+<div class="dash-page">
+    {%if order|length == 0%}
+    <h4>No Orders</h4>
+    {%else%}
+    <h2 style="text-align: center">My Orders</h2>
+    {%endif%}
+    <div class="dash-section">
+        {%for order in order%}
+        <div class='order-seller'>
+            <h3>Sent from seller: {{order.order_item.sent_from_seller}}</h3>
+            {%for product in order.seller_order%}
+                <p>
+                    <a href="{%url 'App_Seller:product_details' pk=product.product.pk%}">{{product.product}}</a> X {{product.quantity}}
+                </p>
+                {%endfor%}
+                {%if order.order_item.sent_from_seller%}
+                <a class="btn btn-danger" href="{%url 'App_Seller:sent' pk=order.order_item.pk%}">
+                    Not Sent
+                </a>
+                    {%else%}
+                <a class="btn btn-info" href="{%url 'App_Seller:sent' pk=order.order_item.pk%}">
+                    Sent
+                </a>
+            {%endif%}
+        </div>
+    {%endfor%}
+    </div>
+ </div>
+{%endblock%}

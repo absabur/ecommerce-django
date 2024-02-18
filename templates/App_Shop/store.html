@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title_block %}{% endblock %}
+
+{% block body_block %}
+<div class="shop-head">
+    <h1>Store Name: {{store.shop_name}}</h1>
+    <h1>Store Address: {{store.shop_address}}</h1>
+    <h1>Store Category: {{store.shop_category}}</h1>
+    <h1>Seller Name: {{store.seller_name}}</h1>
+</div>
+{%if id == "1"%}
+<span class="bg-dark text-light p-2 d-flex align-items-center" style="font-size: 18px;position: absolute; top: 100px;right: 100px; border-radius: 5px;">Verified <i class="ml-2 text-success fa-solid fa-circle-check fa-2x"></i></span>
+{%endif%}
+{%if coupons|length > 0%}
+<h3 style="text-align: center; margin: 15px 0;">Coupons</h3>
+{%endif%}
+<div class="coupons-preview">
+  {%for coupon in coupons %}
+  <div class="coupon">
+      <h4>Code: {{ coupon.code }}</h4>
+      <p class="p-1 mb-0">Discount: {{coupon.discount}}%</p>
+      <p class="p-1 mb-0">Expires on: {{coupon.expiry_date}}</p>
+  </div>
+  {%endfor%}
+</div>
+<h3 style="text-align: center; margin: 15px 0 0 0;">Products</h3>
+{%if products|length == 0%}
+<h3 style="text-align: center; margin: 15px 0 0 0;">No Products</h3>
+{%endif%}
+<div class="products">
+    {% for product in products %}
+    <div class="product-card">
+      <img
+        class="product-card-image"
+        src="/static/{{ product.mainimage }}"
+        alt="{{ product.name }}"
+      />
+      <div class="product-card-body">
+        <h4>
+          <a
+            class="link-title"
+            href="{%url 'App_Shop:product_detail' pk=product.pk%}"
+            >{{ product.name|slice:"20" }}...</a
+          >
+        </h4>
+        <p>
+          Price:
+          <span class="price">{{ product.price|floatformat:2 }}&#2547;</span>
+          <span class="old-price"
+            >{{product.old_price|floatformat:2}}&#2547;</span
+          >
+        </p>
+        <div class="card-button">
+          <a
+            href="{%url 'App_Order:add' pk=product.pk%}"
+            class="btn btn-warning w-100"
+            ><i class="fa fa-shopping-cart"></i>Add to cart</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

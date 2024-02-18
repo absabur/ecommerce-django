@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{%load crispy_forms_tags%}
+{%block style_block%}
+    .checkout-page{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+        width: 100%;
+    }
+    .form{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        margin: 10px;
+        flex: 3;
+        box-shadow: 0px 0px 5px black;
+        width: 100%;
+    }
+    .form form{
+        width: 100%;
+    }
+    .items{
+        flex: 2;
+        padding: 10px;
+        margin: 10px;
+        align-self: flex-start;
+        border: 1px solid black;
+    }
+    .list{
+        box-shadow: 0px 0px 5px black;
+        padding: 10px;
+        margin: 10px;
+        list-style: none;
+    }
+    @media (max-width: 768px) {
+        .checkout-page{
+            flex-direction: column;
+        }
+    }
+{%endblock%}
+{%block title_block%}Check Out{%endblock%}
+{%block body_block%}
+
+<h2 style="text-align: center;">Check Out</h2>
+<div class="checkout-page">
+    <div class="form" style="align-self: flex-start;">
+        <h3>Confirm Address</h3>
+        <form method="POST">
+            {{form|crispy}}
+            {% csrf_token %}
+            <div class="w-100 d-flex">
+                <button class="btn btn-info ml-auto" type="submit">Save Address</button>
+            </div>
+        </form>
+    </div>
+    <div class="items">
+        <ul>
+            <h3 style="text-align:center;">Items</h3>
+            {%for order in orders%}
+                <li class="list">
+                    <a href="{%url 'App_Shop:product_detail' pk=order.order.item.pk%}">{{order.order.item.name}}</a> X {{order.order.quantity}} = 
+                    {%if order.order.discount%}
+                    <span style="color: green;font-weight: bold;">{{order.order.discount}}</span>
+                    <del>{{order.order.get_total}}</del>
+                    {%else%}
+                    <b>{{order.order.get_total}}</b>
+                    {%endif%}
+                    <div class="w-100 m-2 coupon-parent">
+                        <p class="copy-message"></p>
+                        Available Coupons:
+                        {%if not order.coupon%}
+                        No coupon
+                        {%endif%}
+                        {%for coupon in order.coupon%}
+                        <span class="p-1 border coupon-code">{{coupon}}</span>
+                        {%endfor%}
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input required type='text' name="code" class="form-control" placeholder="Enter code" />
+                        <input type='hidden' name="id" value="{{order.order.id}}"/>
+                        <button class="btn btn-danger ml-auto btn-sm m-1" type="submit" name="custom_form_submit">Add Coupon</button>
+                    </form>
+                    {%if order.order.coupon%}
+                    <p>Applied Coupon: <span style="cursor: default" class="btn btn-sm btn-secondary">{{order.order.coupon}}<a href="{%url 'App_Payment:remove_coupon' pk=order.order.pk%}" class="text-warning ml-2"><i class="fa-solid fa-x"></i></a></span></p>
+                    {%endif%}
+                </li>
+            {%endfor%}
+        </ul>
+        <h4 style="text-align:right;">Regular Price: {{total|floatformat:2}}&#2547;</h4>
+        <h4 style="text-align:right; color: green;">Discount: {{discount|floatformat:2}}&#2547;</h4>
+        <h3 style="text-align:right;">Final Price: {{final_price|floatformat:2}}&#2547;</h3>
+        {%if address.is_fully_filled %}
+            <a href="{%url 'App_Payment:payment'%}" class="btn btn-success w-100">Make Payment</a>
+        {%else %}
+            <p class="alert alert-warning">Please fill all the field and save to payment</p>
+        {%endif %}
+    </div>
+</div>
+
+{%endblock%}

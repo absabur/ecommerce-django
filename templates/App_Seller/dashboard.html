@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{%load crispy_forms_tags%}
+{%block title_block%}Dashboard{%endblock%}
+{%block body_block%}
+<div class="dashboard">
+    <h2 class="text-center">Seller Dashboard</h2>
+    <div class="main-content">
+        {%block dash_block%}
+            <div class="dash-links">
+                <a class="dash-circle" href="{%url 'App_Seller:create_category'%}"><i class="fa-solid fa-plus fa-2x"></i>Category</a>
+                <a class="dash-circle" href="{%url 'App_Seller:create_product'%}"><i class="fa-solid fa-plus fa-2x"></i>Product</a>
+                <a class="dash-circle" href="{%url 'App_Seller:create_coupon'%}"><i class="fa-solid fa-plus fa-2x"></i> Coupon</a>
+                <a class="dash-circle" href="{%url 'App_Seller:seller_products'%}">My Products</a>
+                <a class="dash-circle" href="{%url 'App_Seller:order_for_seller'%}">My Orders</a>
+                <a class="dash-circle" href="{%url 'App_Seller:coupons'%}">My Coupons</a>
+                <a class="dash-circle" href="{%url 'App_Seller:all_category'%}">Categories</a>
+                <a class="dash-circle" href="{%url 'App_Seller:fill_seller_info'%}">Edit Seller Info</a>
+            </div>
+        {%endblock%}
+    </div>
+ </div>
+{%endblock%}

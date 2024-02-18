@@ -1,0 +1,38 @@
+{% extends "App_Seller/dashboard.html" %} 
+{%block title_block%}My Products{%endblock%}
+{% block dash_block %}
+<div class="products-page">
+  {%if products|length == 0%}
+  <h4>No Products</h4>
+  {%else%}
+  <h2 style="text-align: center">My Products</h2>
+  {%endif%}
+  <div class="products">
+    {% for product in products %}
+    <div class="product-card">
+      <img
+        class="product-card-image"
+        src="/static/{{ product.mainimage }}"
+        alt="{{ product.name }}"
+      />
+      <div class="product-card-body">
+        <h4>
+          <a
+            class="link-title"
+            href="{%url 'App_Seller:product_details' pk=product.pk%}"
+            >{{ product.name|slice:"20" }}...</a
+          >
+        </h4>
+        <p>
+          Price:
+          <span class="price">{{ product.price|floatformat:2 }}&#2547;</span>
+          <span class="old-price"
+            >{{product.old_price|floatformat:2}}&#2547;</span
+          >
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

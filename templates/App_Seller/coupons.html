@@ -1,0 +1,23 @@
+{% extends "App_Seller/dashboard.html" %}
+{%block title_block%}Coupons{%endblock%}
+{% block dash_block %}
+<div class="dash-page">
+  {%if coupons|length == 0%}
+  <h4>No Coupons</h4>
+  {%else%}
+  <h2 style="text-align: center">My Coupons</h2>
+  {%endif%}
+  <div class="dash-section">
+    {% for coupon in coupons %}
+    <div class="coupon">
+        <h4>Code: {{coupon.code}}</h4>
+        <h4>Discount: {{coupon.discount}}</h4>
+        <h4>Active: <span class="{%if coupon.active%}text-success{%else%}text-warning{%endif%}">{{coupon.active}}</span></h4>
+        <h4>Starting Date: {{coupon.start_date}}</h4>
+        <h4>Expairy Date: {{coupon.expiry_date}}</h4>
+        <a class='btn btn-warning' href="{%url 'App_Seller:update_coupon' pk=coupon.pk%}">Edit</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

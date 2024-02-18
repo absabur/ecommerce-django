@@ -1,0 +1,29 @@
+{% extends "App_Seller/dashboard.html" %} 
+{%load crispy_forms_tags%}
+{%block title_block%}
+    {%if edit%}
+    Update Category
+    {%else%}
+    Create Category
+    {%endif%}
+{%endblock%}
+{% block dash_block %}
+<div class="form">
+    {%if edit%}
+    <h2>Update Category</h2>
+    {%else%}
+    <h2>Create Category</h2>
+    {%endif%}
+    <form method="POST">
+        {{form|crispy}}
+        {% csrf_token %}
+        <button class="btn btn-success w-100" type="submit">
+            {%if edit%}
+            Update
+            {%else%}
+            Create
+            {%endif%}
+        </button>
+    </form>
+</div>
+{%endblock%}

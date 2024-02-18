@@ -1,0 +1,83 @@
+{% extends "App_Seller/dashboard.html" %}
+{% block style_block %}
+    .details-page{
+         display: flex;
+         justify-content: space-around;
+         align-items: center;
+         padding: 10px;
+         width: 100%;
+ 
+    }
+    .detail-image{
+        width: 40%;
+        align-self: flex-start;
+        box-shadow: 0 0 2px black;
+    }
+    .desc{
+        font-size: 22px;
+    }
+    .product-details{
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #f1f1f1;
+        box-shadow: 0 0 2px black;
+        margin-left: 10px;
+        align-self: flex-start;
+    }
+
+    @media (max-width: 768px) {
+        .details-page{
+            flex-direction: column;
+       }
+       .detail-image{
+           width: 100%;
+           margin-bottom: 20px;
+       }
+       .product-details{
+           width: 100%;
+           margin-left: 0px;
+       }
+    }
+{% endblock %}
+{% block title_block %}{{product.name}}{% endblock %}
+
+{% block dash_block %}
+<div class="dash-page">
+  <div>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete Product</button>
+    <a class="btn btn-warning" href="{%url 'App_Seller:edit_product' pk=product.pk%}">Edit Product</a>
+  </div>
+  <div class="details-page">
+    <img class="detail-image" src="/static/{{product.mainimage}}" />
+    <div class="product-details">
+        <h4>{{ product.name}}</h4>
+        <h4>Price: <span class="price">{{ product.price|floatformat:2 }}&#2547;</span> <span class="old-price">{{product.old_price|floatformat:2}}&#2547;</span></h4>
+        <u class="desc">Description</u>
+        <pre> {{ product.description}}</pre>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure to delete this product?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger" href="{%url 'App_Seller:delete_product' pk=product.pk%}">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
