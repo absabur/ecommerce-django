@@ -55,7 +55,7 @@
             <a href="{%url 'App_Order:add' pk=product.pk%}" class="btn btn-warning w-100"><i class="fa fa-shopping-cart"></i>Add to cart</a>
         </div>
         <u class="desc">Description</u>
-        <p> {{ product.description|linebreaks}}</p>
+        <div style="align-self: flex-start;"> {{ product.description|linebreaks}}</div>
     </div>
 </div>
 {%if store%}

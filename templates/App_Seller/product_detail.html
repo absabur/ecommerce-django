@@ -57,7 +57,7 @@
         <h4>{{ product.name}}</h4>
         <h4>Price: <span class="price">{{ product.price|floatformat:2 }}&#2547;</span> <span class="old-price">{{product.old_price|floatformat:2}}&#2547;</span></h4>
         <u class="desc">Description</u>
-        <p> {{ product.description|linebreaks}}</p>
+        <div style="align-self: flex-start;"> {{ product.description|linebreaks}}</div>
     </div>
   </div>
 </div>
